@@ -1,0 +1,16 @@
+---
+- name: First play!
+  hosts: localhost
+  vars:
+    birthday: true
+  tasks:
+    - block:
+        - name: Grab username
+          command: whoami
+          register: my_user
+
+        - name: Print message
+          debug:
+            msg: "Good day, {{ my_user['stdout'] }}!"
+      when: birthday
+
